@@ -17,7 +17,7 @@ API_HASH = "b33c76f4468f79c192472d226d3e59fc"
 OTP_GROUP_ID = -1003773115636  # Your OTP group chat ID
 
 # Initialize bot
-bot = TelegramClient('bot_session', API_ID, API_Hash).start(bot_token=BOT_TOKEN)
+bot = TelegramClient('bot_session', API_ID, API_HASH).start(bot_token=BOT_TOKEN)
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
@@ -103,7 +103,7 @@ def init_db():
     # Insert sample admin
     c.execute("SELECT COUNT(*) FROM admins")
     if c.fetchone()[0] == 0:
-        c.execute("INSERT INTO admins (user_id) VALUES (?)", (YOUR_ADMIN_ID,))
+        c.execute("INSERT INTO admins (user_id) VALUES (?)", (5853022053,))
     
     conn.commit()
     conn.close()
@@ -123,7 +123,7 @@ def is_admin(user_id):
 def check_requirements(user_id):
     try:
         # Check channel join requirement
-        channel_username = "YOUR_CHANNEL_USERNAME"  # Change this
+        channel_username = "https://t.me/otprether"  # Change this
         try:
             bot.loop.run_until_complete(
                 bot.get_permissions(channel_username, user_id)
@@ -133,7 +133,7 @@ def check_requirements(user_id):
             channel_ok = False
         
         # Check group join requirement
-        group_username = "YOUR_GROUP_USERNAME"  # Change this
+        group_username = "https://t.me/+MgMOW9fAR5E1ZTE1"  # Change this
         try:
             bot.loop.run_until_complete(
                 bot.get_permissions(group_username, user_id)
@@ -258,8 +258,8 @@ async def start_handler(event):
     # Check join requirements
     if not check_requirements(user_id):
         keyboard = [[
-            {"text": "✅ Join Channel", "url": "https://t.me/YOUR_CHANNEL"},
-            {"text": "✅ Join Group", "url": "https://t.me/YOUR_GROUP"}
+            {"text": "✅ Join Channel", "url": "https://t.me/otprether"},
+            {"text": "✅ Join Group", "url": "https://t.me/+MgMOW9fAR5E1ZTE1"}
         ], [
             {"text": "🔄 Check Status", "callback_data": "check_status"}
         ]]
@@ -437,7 +437,7 @@ async def callback_handler(event):
         
         buttons.append([
             {"text": "🔄 Refresh", "callback_data": f"refresh_{service}_{country_code}"},
-            {"text": "💬 OTP Group", "url": "https://t.me/YOUR_OTP_GROUP"}
+            {"text": "💬 OTP Group", "url": "https://t.me/+MgMOW9fAR5E1ZTE1"}
         ])
         buttons.append([{"text": "« Back", "callback_data": "get_number"}])
         
