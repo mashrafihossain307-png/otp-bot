@@ -550,6 +550,9 @@ async def main():
     
     await bot.run_until_disconnected()
 
-if __name__ == '__main__':
-    with bot:
-        bot.loop.run_until_complete(main())
+if __name__ == "__main__":
+    init_db()
+    logger.info("Bot started successfully!")
+
+    bot.loop.create_task(monitor_otp())
+    bot.run_until_disconnected()
